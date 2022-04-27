@@ -77,6 +77,24 @@ public class ExemplosStream {
 		IntStream.rangeClosed(1, 10).map(n -> n*2).peek(null).forEach(System.out::println); 
 	}
 	
+	private static void exemploCollect() {
+		
+	        Map<Integer,List<String>> mapColetado = 
+        	Stream.of("Ana", "Beatriz", "Clara", "Diana", "Eliane")
+                	.collect(Collectors.groupingBy(nome -> nome.length() ) );
+                
+        	System.out.println(mapColetado);
+		
+		//A chave do map eh do tipo que é retornado no lambda do groupingBy
+		Map<Boolean,List<String>> mapColetado2 = 
+        	Stream.of("Ana", "Beatriz", "Clara", "Diana", "Eliane")
+                	.collect(Collectors.groupingBy(nome -> nome.length() > 5 ) );
+                
+        	System.out.println(mapColetado2);
+		
+		
+	}
+	
 	
 	private static void exemploReduce() {
 		
