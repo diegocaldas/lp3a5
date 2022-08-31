@@ -1,7 +1,6 @@
 package br.edu.ifsp.lp3a5.aula8;
 
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 public class ExemplosOptions {
 	
