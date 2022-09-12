@@ -17,7 +17,8 @@ import java.util.stream.Stream;
 public class ExemplosStream {
 	
 	public static void main(String args[]) {
-		exemploReduce();
+		//exemploReduce();
+		exemploDesempenhoMapPrimeiro();
 	}
 	
 	
@@ -95,6 +96,48 @@ public class ExemplosStream {
         	System.out.println(mapColetado2);
 		
 		
+	}
+	
+	private static void exemploLazyEvaluation() {
+		String[] nomes = new String[] {"Ana", "Beatriz", "Clara", "Diana", "Eliane"};
+		System.out.println("\n\nAs operações intermediárias só são realizadas quando uma terminal é chamada.");
+		Arrays.stream(nomes).filter(f -> f.startsWith("A"));//NÃO FAZ NADA
+		System.out.println("\n\nO comando anterior não foi executado, mas o próximo será.");		
+		Arrays.stream(nomes).filter(f -> f.startsWith("A")).forEach(System.out::println);		
+	}
+	
+	private static void exemploOrdemExecucaoComandos() {
+		Stream.of("Carla", "Clara", "Isabel") 
+
+		.filter(s -> { 
+			System.out.println("filter: " + s); 
+			return true; 
+		}) 
+		.forEach(s -> System.out.println("forEach: " + s));
+	}
+	
+	private static void exemploDesempenhoMapPrimeiro() {
+		Stream.of("Carla", "Clara", "Isabel")
+		.map( s -> {
+			System.out.println("map: " + s);
+			return s.toUpperCase(); })
+		.filter(s -> { 
+			System.out.println("filter: " + s); 
+			return s.startsWith("I"); 
+		}) 
+		.forEach(s -> System.out.println("forEach: " + s));
+	}
+	
+	private static void exemploDesempenhoFilterPrimeiro() {
+		Stream.of("Carla", "Clara", "Isabel")
+		.filter(s -> { 
+			System.out.println("filter: " + s); 
+			return s.startsWith("I"); 
+		})
+		.map( s -> {
+			System.out.println("map: " + s);
+			return s.toUpperCase(); })
+		.forEach(s -> System.out.println("forEach: " + s));
 	}
 	
 	
